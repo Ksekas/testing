@@ -1,1 +1,476 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Time Zone Clock - Professional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3a3f47 0%, #5a6268 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #2b2f36 0%, #3a3f47 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #81c995;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        .header h1 {
+            color: #81c995;
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        .header p {
+            color: #b8bcc4;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+        }
+        .container {
+            flex: 1;
+            padding: 50px 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .section {
+            margin-bottom: 60px;
+        }
+        .section-title {
+            color: #81c995;
+            font-size: 2em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #81c995;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        .clocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .clock-card {
+            background: linear-gradient(135deg, #3a3f47 0%, #464d56 100%);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .clock-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #81c995 0%, #a8d5ba 100%);
+        }
+        .clock-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(129, 201, 149, 0.3);
+            border-color: #81c995;
+        }
+        .timezone-name {
+            color: #81c995;
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .time-display {
+            color: #ffffff;
+            font-size: 3.5em;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            margin: 25px 0;
+            letter-spacing: 4px;
+        }
+        .day-display {
+            color: #a8d5ba;
+            font-size: 1em;
+            margin: 12px 0;
+            font-weight: 600;
+        }
+        .date-display {
+            color: #9ba3ab;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+        .remove-btn {
+            margin-top: 20px;
+            width: 100%;
+            background: rgba(220, 53, 69, 0.25);
+            color: #ff6b7a;
+            border: 2px solid #ff6b7a;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+        .remove-btn:hover {
+            background: #ff6b7a;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .info-section {
+            background: linear-gradient(135deg, #3a3f47 0%, #464d56 100%);
+            border-radius: 12px;
+            padding: 0;
+            border-left: 6px solid #81c995;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        .accordion-button {
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(135deg, #464d56 0%, #3a3f47 100%);
+            border: none;
+            color: #81c995;
+            font-size: 1.25em;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .accordion-button::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .accordion-button.active::after {
+            transform: rotate(180deg);
+        }
+        .accordion-button:hover {
+            background: linear-gradient(135deg, #81c995 0%, #a8d5ba 100%);
+            color: #2b2f36;
+            padding-left: 30px;
+        }
+        .accordion-content {
+            display: none;
+            background: rgba(129, 201, 149, 0.08);
+            border-top: 2px solid #81c995;
+            padding: 30px 25px;
+            color: #dfe3e9;
+            line-height: 1.95;
+            text-align: justify;
+            font-size: 1em;
+        }
+        .accordion-content.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 1000px;
+            }
+        }
+        .controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 40px;
+            background: linear-gradient(135deg, #3a3f47 0%, #464d56 100%);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            margin-top: 40px;
+        }
+        button {
+            background: linear-gradient(135deg, #81c995 0%, #6eb583 100%);
+            color: #2b2f36;
+            border: none;
+            padding: 16px 35px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.05em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(129, 201, 149, 0.2);
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(129, 201, 149, 0.4);
+        }
+        .reset-btn {
+            background: linear-gradient(135deg, #707a85 0%, #5a6268 100%);
+            color: #f5f5f5;
+            box-shadow: 0 5px 15px rgba(80, 85, 90, 0.2);
+        }
+        .reset-btn:hover {
+            box-shadow: 0 12px 25px rgba(80, 85, 90, 0.4);
+        }
+        .timezone-selector {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .timezone-selector.show {
+            display: flex;
+        }
+        .selector-content {
+            background: linear-gradient(135deg, #3a3f47 0%, #464d56 100%);
+            border-radius: 18px;
+            padding: 40px;
+            max-width: 600px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            border: 3px solid #81c995;
+        }
+        .selector-content h2 {
+            margin-bottom: 30px;
+            color: #81c995;
+            font-size: 2em;
+            letter-spacing: 1px;
+        }
+        .close-btn {
+            background: linear-gradient(135deg, #ff6b7a 0%, #dc3545 100%);
+            color: white;
+            float: right;
+            padding: 10px 20px;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 107, 122, 0.3);
+        }
+        .timezone-option {
+            padding: 18px;
+            margin: 12px 0;
+            border: 2px solid #5a6268;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #dfe3e9;
+            background: rgba(129, 201, 149, 0.08);
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        .timezone-option:hover {
+            background: rgba(129, 201, 149, 0.2);
+            border-color: #81c995;
+            transform: translateX(10px);
+            color: #81c995;
+            box-shadow: 0 5px 15px rgba(129, 201, 149, 0.2);
+        }
+        .footer {
+            background: linear-gradient(135deg, #2b2f36 0%, #3a3f47 100%);
+            color: #9ba3ab;
+            text-align: center;
+            padding: 25px;
+            border-top: 4px solid #81c995;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .clocks-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .time-display {
+                font-size: 2.5em;
+            }
+            .container {
+                padding: 25px 15px;
+            }
+            .controls {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 Global Time Zone Clock</h1>
+        <p>Professional Time Zone Management & Display System</p>
+    </div>
 
+    <div class="container">
+        <div class="section">
+            <div class="section-title">⏰ Current Time Zones</div>
+            <div class="clocks-grid" id="clocksGrid"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">ℹ️ Student Representative Information</div>
+            
+            <div class="info-section">
+                <button class="accordion-button" onclick="toggleAccordion(this)">
+                    Dlaczego chcę zostać Rzecznikiem?
+                    <span></span>
+                </button>
+                <div class="accordion-content">
+                    Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym, aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację. Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań, które są sprawiedliwe dla wszystkich stron. Ważne jest dla mnie uważne słuchanie innych oraz spokojne i odpowiedzialne podejście do problemów.
+                </div>
+            </div>
+
+            <div class="info-section">
+                <button class="accordion-button" onclick="toggleAccordion(this)">
+                    Dlaczego uważam, że będę dobrym rzecznikiem
+                    <span></span>
+                </button>
+                <div class="accordion-content">
+                    Uważam, że będę dobrym rzecznikiem, ponieważ zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli. Staram się zawsze patrzeć na sytuację z różnych perspektyw i szukać sprawiedliwych rozwiązań. Potrafię słuchać innych bez oceniania i podchodzić do problemów spokojnie oraz odpowiedzialnie.
+                </div>
+            </div>
+
+            <div class="info-section">
+                <button class="accordion-button" onclick="toggleAccordion(this)">
+                    Jak działam w trudnych sytuacjach?
+                    <span></span>
+                </button>
+                <div class="accordion-content">
+                    W takiej sytuacji najpierw wysłuchałabym spokojnie uczennicy poszkodowanej i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik mam obowiązek zachować bezstronność i zadbać o sprawiedliwy przebieg sprawy, dlatego muszę poznać stanowisko obu stron. Skontaktowałabym się również z drugą uczennicą, zebrała wszystkie informacje i dążyła do tego, aby decyzja była oparta na faktach.
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="openTimezoneSelector()">➕ Add Time Zone</button>
+            <button class="reset-btn" onclick="resetToDefault()">🔄 Reset to Default</button>
+        </div>
+    </div>
+
+    <div class="timezone-selector" id="timezoneSelector">
+        <div class="selector-content">
+            <button class="close-btn" onclick="closeTimezoneSelector()">✕ Close</button>
+            <h2>Select a Time Zone</h2>
+            <div id="timezoneList"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Global Clock | Professional Time Zone Manager</p>
+    </div>
+
+    <script>
+        const defaultTimezones = ['America/New_York', 'Europe/London', 'Europe/Paris', 'Asia/Tokyo', 'Australia/Sydney', 'Asia/Dubai'];
+        const allTimezones = ['America/New_York', 'America/Los_Angeles', 'America/Chicago', 'America/Denver', 'America/Anchorage', 'Pacific/Honolulu', 'America/Toronto', 'America/Mexico_City', 'America/Sao_Paulo', 'America/Buenos_Aires', 'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Europe/Madrid', 'Europe/Rome', 'Europe/Moscow', 'Europe/Istanbul', 'Africa/Cairo', 'Africa/Lagos', 'Africa/Johannesburg', 'Asia/Dubai', 'Asia/Bangkok', 'Asia/Hong_Kong', 'Asia/Shanghai', 'Asia/Tokyo', 'Asia/Seoul', 'Asia/Singapore', 'Asia/Mumbai', 'Asia/Kolkata', 'Australia/Sydney', 'Australia/Melbourne', 'Australia/Perth', 'Pacific/Auckland'];
+
+        let activeTimezones = defaultTimezones;
+
+        function updateClocks() {
+            const clocksGrid = document.getElementById('clocksGrid');
+            clocksGrid.innerHTML = '';
+
+            activeTimezones.forEach(timezone => {
+                const now = new Date().toLocaleString('en-US', { timeZone: timezone });
+                const date = new Date(now);
+                
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
+                const time = `${hours}:${minutes}:${seconds}`;
+                
+                const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                const dayStr = date.toLocaleDateString('en-US', { weekday: 'long' });
+                const cityName = timezone.split('/')[1].replace(/_/g, ' ');
+                const region = timezone.split('/')[0];
+                
+                const card = document.createElement('div');
+                card.className = 'clock-card';
+                card.innerHTML = `<div class="timezone-name">${region} • ${cityName}</div><div class="time-display">${time}</div><div class="day-display">${dayStr}</div><div class="date-display">${dateStr}</div><button class="remove-btn" onclick="removeTimezone('${timezone}')">✕ Remove</button>`;
+                clocksGrid.appendChild(card);
+            });
+        }
+
+        function openTimezoneSelector() {
+            const timezoneList = document.getElementById('timezoneList');
+            timezoneList.innerHTML = '';
+            allTimezones.forEach(timezone => {
+                if (!activeTimezones.includes(timezone)) {
+                    const option = document.createElement('div');
+                    option.className = 'timezone-option';
+                    const cityName = timezone.split('/')[1].replace(/_/g, ' ');
+                    const region = timezone.split('/')[0];
+                    option.textContent = `${region} • ${cityName}`;
+                    option.onclick = () => addTimezone(timezone);
+                    timezoneList.appendChild(option);
+                }
+            });
+            document.getElementById('timezoneSelector').classList.add('show');
+        }
+
+        function closeTimezoneSelector() {
+            document.getElementById('timezoneSelector').classList.remove('show');
+        }
+
+        function addTimezone(timezone) {
+            if (!activeTimezones.includes(timezone)) {
+                activeTimezones.push(timezone);
+                updateClocks();
+                closeTimezoneSelector();
+            }
+        }
+
+        function removeTimezone(timezone) {
+            activeTimezones = activeTimezones.filter(tz => tz !== timezone);
+            updateClocks();
+        }
+
+        function resetToDefault() {
+            activeTimezones = defaultTimezones;
+            updateClocks();
+        }
+
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+
+            document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('show'));
+            document.querySelectorAll('.accordion-button').forEach(btn => btn.classList.remove('active'));
+
+            if (!isOpen) {
+                content.classList.add('show');
+                button.classList.add('active');
+            }
+        }
+
+        updateClocks();
+        setInterval(updateClocks, 1000);
+    </script>
+</body>
+</html>
