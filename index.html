@@ -3,133 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zegar Cyfrowy</title>
+    <title>Student Representative</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #3a3f47 0%, #5a6268 100%);
-            color: #81c995;
+        * {
             margin: 0;
-            padding: 30px;
-            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 { font-size: 2.5em; margin-bottom: 30px; }
-        .clock-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3a3f47 0%, #5a6268 100%);
+            min-height: 100vh;
+            padding: 30px;
+        }
+        .header {
+            background: linear-gradient(135deg, #2b2f36 0%, #3a3f47 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #81c995;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
             margin-bottom: 40px;
         }
-        .clock-card {
-            background: #464d56;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #81c995;
+        .header h1 {
+            color: #81c995;
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
-        .clock-card .time {
-            font-size: 2.5em;
-            font-family: monospace;
-            color: white;
-            margin: 15px 0;
+        .header p {
+            color: #b8bcc4;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-title {
+            color: #81c995;
+            font-size: 2em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #81c995;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
         .accordion-item {
-            background: #464d56;
-            border-left: 5px solid #81c995;
-            border-radius: 10px;
-            margin: 15px auto;
-            max-width: 800px;
+            background: linear-gradient(135deg, #3a3f47 0%, #464d56 100%);
+            border-radius: 12px;
+            padding: 0;
+            border-left: 6px solid #81c995;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
-        button {
+        .accordion-button {
             width: 100%;
-            padding: 15px;
-            background: #464d56;
-            color: #81c995;
+            padding: 25px;
+            background: linear-gradient(135deg, #464d56 0%, #3a3f47 100%);
             border: none;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
+            color: #81c995;
+            font-size: 1.25em;
+            font-weight: 700;
             text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        button:hover { background: #81c995; color: #2b2f36; }
-        .content {
+        .accordion-button::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .accordion-button.active::after {
+            transform: rotate(180deg);
+        }
+        .accordion-button:hover {
+            background: linear-gradient(135deg, #81c995 0%, #a8d5ba 100%);
+            color: #2b2f36;
+            padding-left: 30px;
+        }
+        .accordion-content {
             display: none;
-            padding: 15px;
-            background: rgba(129, 201, 149, 0.1);
+            background: rgba(129, 201, 149, 0.08);
+            border-top: 2px solid #81c995;
+            padding: 30px 25px;
             color: #dfe3e9;
+            line-height: 1.95;
             text-align: justify;
-            line-height: 1.8;
+            font-size: 1em;
         }
-        .content.show { display: block; }
+        .accordion-content.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 1000px;
+            }
+        }
+        .footer {
+            background: linear-gradient(135deg, #2b2f36 0%, #3a3f47 100%);
+            color: #9ba3ab;
+            text-align: center;
+            padding: 25px;
+            border-top: 4px solid #81c995;
+            margin-top: 50px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
-    <h1>🌍 Globalny Zegar</h1>
-    <div class="clock-grid" id="clocks"></div>
-    
-    <h2 style="color: #81c995; margin-top: 40px;">Informacje</h2>
-    
-    <div class="accordion-item">
-        <button onclick="toggleAccordion(this)">Dlaczego chcę zostać Rzecznikiem?</button>
-        <div class="content">
-            Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym, aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację. Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań, które są sprawiedliwe dla wszystkich stron. Ważne jest dla mnie uważne słuchanie innych oraz spokojne i odpowiedzialne podejście do problemów.
-        </div>
-    </div>
-    
-    <div class="accordion-item">
-        <button onclick="toggleAccordion(this)">Dlaczego uważam, że będę dobrym rzecznikiem</button>
-        <div class="content">
-            Uważam, że będę dobrym rzecznikiem, ponieważ zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli. Staram się zawsze patrzeć na sytuację z różnych perspektyw i szukać sprawiedliwych rozwiązań. Potrafię słuchać innych bez oceniania i podchodzić do problemów spokojnie oraz odpowiedzialnie.
-        </div>
-    </div>
-    
-    <div class="accordion-item">
-        <button onclick="toggleAccordion(this)">Jak działam w trudnych sytuacjach?</button>
-        <div class="content">
-            W takiej sytuacji najpierw wysłuchałabym spokojnie uczennicy poszkodowanej i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik mam obowiązek zachować bezstronność i zadbać o sprawiedliwy przebieg sprawy, dlatego muszę poznać stanowisko obu stron. Skontaktowałabym się również z drugą uczennicą, zebrała wszystkie informacje i dążyła do tego, aby decyzja była oparta na faktach.
-        </div>
+    <div class="header">
+        <h1>👨‍🎓 Rzecznik Praw Ucznia</h1>
+        <p>Student Representative Information</p>
     </div>
 
-    <script>
-        const zones = [
-            {name: 'New York', tz: 'America/New_York'},
-            {name: 'London', tz: 'Europe/London'},
-            {name: 'Paris', tz: 'Europe/Paris'},
-            {name: 'Tokyo', tz: 'Asia/Tokyo'},
-            {name: 'Sydney', tz: 'Australia/Sydney'},
-            {name: 'Dubai', tz: 'Asia/Dubai'}
-        ];
+    <div class="container">
+        <div class="section-title">ℹ️ Informacje</div>
+        
+        <div class="accordion-item">
+            <button class="accordion-button" onclick="toggleAccordion(this)">
+                Dlaczego chcę zostać Rzecznikiem?
+            </button>
+            <div class="accordion-content">
+                Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym, aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację. Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań, które są sprawiedliwe dla wszystkich stron. Ważne jest dla mnie uważne słuchanie innych oraz spokojne i odpowiedzialne podejście do problemów.
+            </div>
+        </div>
 
-        function updateClocks() {
-            const clocks = document.getElementById('clocks');
-            if (clocks.children.length === 0) {
-                zones.forEach(z => {
-                    const card = document.createElement('div');
-                    card.className = 'clock-card';
-                    card.id = z.tz;
-                    clocks.appendChild(card);
-                });
-            }
+        <div class="accordion-item">
+            <button class="accordion-button" onclick="toggleAccordion(this)">
+                Dlaczego uważam, że będę dobrym rzecznikiem
+            </button>
+            <div class="accordion-content">
+                Uważam, że będę dobrym rzecznikiem, ponieważ zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli. Staram się zawsze patrzeć na sytuację z różnych perspektyw i szukać sprawiedliwych rozwiązań. Potrafię słuchać innych bez oceniania i podchodzić do problemów spokojnie oraz odpowiedzialnie.
+            </div>
+        </div>
 
-            zones.forEach(z => {
-                const card = document.getElementById(z.tz);
-                const now = new Date().toLocaleString('pl-PL', {timeZone: z.tz});
-                const d = new Date(now);
-                const h = String(d.getHours()).padStart(2, '0');
-                const m = String(d.getMinutes()).padStart(2, '0');
-                const s = String(d.getSeconds()).padStart(2, '0');
-                const date = d.toLocaleDateString('pl-PL');
-                card.innerHTML = `<div style="font-weight: bold; margin-bottom: 10px;">${z.name}</div><div class="time">${h}:${m}:${s}</div><div style="color: #b8bcc4; font-size: 0.9em;">${date}</div>`;
-            });
-        }
-
-        function toggleAccordion(btn) {
-            const content = btn.nextElementSibling;
-            document.querySelectorAll('.content').forEach(c => c.classList.remove('show'));
-            content.classList.add('show');
-        }
-
-        updateClocks();
-        setInterval(updateClocks, 1000);
-    </script>
-</body>
-</html>
+        <div class="accordion-item">
+            <button class="accordion-button" onclick="toggleAccordion(this)">
+                Jak działam w trudnych sytuacjach?
+            </button>
+            <div class="accordion-content">
+                W takiej sytuacji najpierw wysłuchałabym spokojnie uczennicy poszkodowanej i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik mam obowiązek zachować bezstronność i zadbać o sprawiedliwy przebieg sprawy, dlatego muszę poznać stan*
+
