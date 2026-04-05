@@ -3,82 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Example</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <title>Zegar Cyfrowy</title>
     <style>
-        .accordion {
-            margin-top: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3a3f47 0%, #5a6268 100%);
+            color: #81c995;
+            margin: 0;
+            padding: 30px;
+            text-align: center;
         }
+        h1 { font-size: 2.5em; margin-bottom: 30px; }
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .clock-card {
+            background: #464d56;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #81c995;
+        }
+        .clock-card .time {
+            font-size: 2.5em;
+            font-family: monospace;
+            color: white;
+            margin: 15px 0;
+        }
+        .accordion-item {
+            background: #464d56;
+            border-left: 5px solid #81c995;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 800px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #464d56;
+            color: #81c995;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: left;
+        }
+        button:hover { background: #81c995; color: #2b2f36; }
+        .content {
+            display: none;
+            padding: 15px;
+            background: rgba(129, 201, 149, 0.1);
+            color: #dfe3e9;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        .content.show { display: block; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>QR Code Generator</h1>
-        <div id="qrcode"></div>
-        <button id="generateBtn" class="btn btn-primary">Generuj QR Kod</button>
-
-        <div class="accordion" id="accordionExample">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Dlaczego chcę zostać Rzecznikiem?
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Chcę zostać rzecznikiem, ponieważ pragnę być głosem tych, którzy nie mają możliwości wyrażania swoich myśli i potrzeb. Wierzę, że każdy zasługuje na to, by zostali wysłuchani.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Dlaczego uważam, że będę dobrym rzecznikiem
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Uważam, że będę dobrym rzecznikiem, ponieważ mam zdolność empatyzowania z innymi oraz umiejętność słuchania. Potrafię łączyć ludzi i dążyć do rozwiązań.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Jak działam w trudnych sytuacjach?
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        W trudnych sytuacjach staram się zachować spokój i analizować problem. Uważam, że efektywna komunikacja jest kluczem do rozwiązywania konfliktów.
-                    </div>
-                </div>
-            </div>
+    <h1>🌍 Globalny Zegar</h1>
+    <div class="clock-grid" id="clocks"></div>
+    
+    <h2 style="color: #81c995; margin-top: 40px;">Informacje</h2>
+    
+    <div class="accordion-item">
+        <button onclick="toggleAccordion(this)">Dlaczego chcę zostać Rzecznikiem?</button>
+        <div class="content">
+            Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym, aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację. Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań, które są sprawiedliwe dla wszystkich stron. Ważne jest dla mnie uważne słuchanie innych oraz spokojne i odpowiedzialne podejście do problemów.
         </div>
     </div>
+    
+    <div class="accordion-item">
+        <button onclick="toggleAccordion(this)">Dlaczego uważam, że będę dobrym rzecznikiem</button>
+        <div class="content">
+            Uważam, że będę dobrym rzecznikiem, ponieważ zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli. Staram się zawsze patrzeć na sytuację z różnych perspektyw i szukać sprawiedliwych rozwiązań. Potrafię słuchać innych bez oceniania i podchodzić do problemów spokojnie oraz odpowiedzialnie.
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <button onclick="toggleAccordion(this)">Jak działam w trudnych sytuacjach?</button>
+        <div class="content">
+            W takiej sytuacji najpierw wysłuchałabym spokojnie uczennicy poszkodowanej i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik mam obowiązek zachować bezstronność i zadbać o sprawiedliwy przebieg sprawy, dlatego muszę poznać stanowisko obu stron. Skontaktowałabym się również z drugą uczennicą, zebrała wszystkie informacje i dążyła do tego, aby decyzja była oparta na faktach.
+        </div>
+    </div>
+
     <script>
-        $(document).ready(function() {
-            $('#generateBtn').click(function() {
-                var qrcode = $("#qrcode").empty();
-                var textToEncode = 'https://example.com'; 
-                qrcode.qrcode({
-                    text: textToEncode,
-                    width: 128,
-                    height: 128
+        const zones = [
+            {name: 'New York', tz: 'America/New_York'},
+            {name: 'London', tz: 'Europe/London'},
+            {name: 'Paris', tz: 'Europe/Paris'},
+            {name: 'Tokyo', tz: 'Asia/Tokyo'},
+            {name: 'Sydney', tz: 'Australia/Sydney'},
+            {name: 'Dubai', tz: 'Asia/Dubai'}
+        ];
+
+        function updateClocks() {
+            const clocks = document.getElementById('clocks');
+            if (clocks.children.length === 0) {
+                zones.forEach(z => {
+                    const card = document.createElement('div');
+                    card.className = 'clock-card';
+                    card.id = z.tz;
+                    clocks.appendChild(card);
                 });
+            }
+
+            zones.forEach(z => {
+                const card = document.getElementById(z.tz);
+                const now = new Date().toLocaleString('pl-PL', {timeZone: z.tz});
+                const d = new Date(now);
+                const h = String(d.getHours()).padStart(2, '0');
+                const m = String(d.getMinutes()).padStart(2, '0');
+                const s = String(d.getSeconds()).padStart(2, '0');
+                const date = d.toLocaleDateString('pl-PL');
+                card.innerHTML = `<div style="font-weight: bold; margin-bottom: 10px;">${z.name}</div><div class="time">${h}:${m}:${s}</div><div style="color: #b8bcc4; font-size: 0.9em;">${date}</div>`;
             });
-        });
+        }
+
+        function toggleAccordion(btn) {
+            const content = btn.nextElementSibling;
+            document.querySelectorAll('.content').forEach(c => c.classList.remove('show'));
+            content.classList.add('show');
+        }
+
+        updateClocks();
+        setInterval(updateClocks, 1000);
     </script>
 </body>
 </html>
