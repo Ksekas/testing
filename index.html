@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rzecznik Praw Ucznia</title>
+    <title>Rzecznik Praw Ucznia - Ksenia Kasparek</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -50,21 +50,26 @@
             font-weight: 700;
             cursor: pointer;
             text-align: left;
+            transition: all 0.3s ease;
         }
         .accordion-button:hover {
             background: linear-gradient(135deg, #81c995 0%, #a8d5ba 100%);
             color: #2b2f36;
         }
         .accordion-content {
-            display: none;
+            max-height: 0;
+            overflow: hidden;
             background: rgba(129, 201, 149, 0.08);
             border-top: 2px solid #81c995;
-            padding: 30px 25px;
             color: #dfe3e9;
             line-height: 1.95;
             text-align: justify;
+            transition: max-height 0.4s ease;
         }
-        .accordion-content.show { display: block; }
+        .accordion-content.show { 
+            max-height: 1000px;
+            padding: 30px 25px;
+        }
         .footer {
             background: linear-gradient(135deg, #2b2f36 0%, #3a3f47 100%);
             color: #9ba3ab;
@@ -78,8 +83,8 @@
 </head>
 <body>
     <div class="header">
-        <h1>Rzecznik Praw Ucznia</h1>
-        <p>Kandydat na Rzecznika</p>
+        <h1>Rzecznik Praw Ucznia - Ksenia Kasparek</h1>
+        <p>Kandydatka na Rzecznika Praw Ucznia</p>
     </div>
     <div class="container">
         <div class="section-title">Informacje</div>
@@ -90,9 +95,9 @@
             </div>
         </div>
         <div class="accordion-item">
-            <button class="accordion-button" onclick="toggle(this)">Dlaczego uważam, że będę dobrym rzecznikiem</button>
+            <button class="accordion-button" onclick="toggle(this)">Dlaczego uważam, że będę dobrym rzecznikiem?</button>
             <div class="accordion-content">
-                Uważam, że będę dobrym rzecznikiem, ponieważ zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli. Staram się zawsze patrzeć na sytuację z różnych perspektyw i szukać sprawiedliwych rozwiązań. Potrafię słuchać innych bez oceniania i podchodzić do problemów spokojnie oraz odpowiedzialnie.
+                Rola rzecznika wymaga spokoju, obiektywizmu i odpowiedzialności w podejmowaniu decyzji. W trudnych sytuacjach ważne jest dokładne zrozumienie problemu oraz wysłuchanie wszystkich stron przed wyciągnięciem wniosków. Dlatego kluczowe jest rzetelne i przemyślane podejście, które pozwala zadbać o sprawiedliwy przebieg każdej sprawy.
             </div>
         </div>
         <div class="accordion-item">
@@ -102,12 +107,15 @@
             </div>
         </div>
     </div>
-    <div class="footer"><p>Copyright 2026 Rzecznik Praw Ucznia</p></div>
+    <div class="footer"></div>
     <script>
         function toggle(btn) {
             const content = btn.nextElementSibling;
+            const isOpen = content.classList.contains('show');
             document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('show'));
-            content.classList.add('show');
+            if (!isOpen) {
+                content.classList.add('show');
+            }
         }
     </script>
 </body>
