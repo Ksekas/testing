@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Representative</title>
+    <title>Rzecznik Praw Ucznia</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #3a3f47 0%, #5a6268 100%);
@@ -25,31 +21,15 @@
             border-radius: 10px;
             margin-bottom: 40px;
         }
-        .header h1 {
-            color: #81c995;
-            font-size: 3em;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-        .header p {
-            color: #b8bcc4;
-            font-size: 1.1em;
-            letter-spacing: 0.5px;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        .header h1 { color: #81c995; font-size: 3em; margin-bottom: 10px; }
+        .header p { color: #b8bcc4; font-size: 1.1em; }
+        .container { max-width: 1000px; margin: 0 auto; }
         .section-title {
             color: #81c995;
             font-size: 2em;
             margin-bottom: 30px;
             padding-bottom: 15px;
             border-bottom: 3px solid #81c995;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
         }
         .accordion-item {
             background: linear-gradient(135deg, #3a3f47 0%, #464d56 100%);
@@ -68,26 +48,12 @@
             color: #81c995;
             font-size: 1.25em;
             font-weight: 700;
-            text-align: left;
             cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .accordion-button::after {
-            content: '▼';
-            font-size: 0.8em;
-            transition: transform 0.3s ease;
-        }
-        .accordion-button.active::after {
-            transform: rotate(180deg);
+            text-align: left;
         }
         .accordion-button:hover {
             background: linear-gradient(135deg, #81c995 0%, #a8d5ba 100%);
             color: #2b2f36;
-            padding-left: 30px;
         }
         .accordion-content {
             display: none;
@@ -97,22 +63,8 @@
             color: #dfe3e9;
             line-height: 1.95;
             text-align: justify;
-            font-size: 1em;
         }
-        .accordion-content.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                max-height: 0;
-            }
-            to {
-                opacity: 1;
-                max-height: 1000px;
-            }
-        }
+        .accordion-content.show { display: block; }
         .footer {
             background: linear-gradient(135deg, #2b2f36 0%, #3a3f47 100%);
             color: #9ba3ab;
@@ -121,63 +73,41 @@
             border-top: 4px solid #81c995;
             margin-top: 50px;
             border-radius: 10px;
-            font-weight: 600;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>👨‍🎓 Rzecznik Praw Ucznia</h1>
-        <p>Student Representative Information</p>
+        <p>Kandydat na Rzecznika</p>
     </div>
-
     <div class="container">
         <div class="section-title">ℹ️ Informacje</div>
-        
         <div class="accordion-item">
-            <button class="accordion-button" onclick="toggleAccordion(this)">
-                Dlaczego chcę zostać Rzecznikiem?
-            </button>
+            <button class="accordion-button" onclick="toggle(this)">Dlaczego chcę zostać Rzecznikiem?</button>
             <div class="accordion-content">
                 Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym, aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację. Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań, które są sprawiedliwe dla wszystkich stron. Ważne jest dla mnie uważne słuchanie innych oraz spokojne i odpowiedzialne podejście do problemów.
             </div>
         </div>
-
         <div class="accordion-item">
-            <button class="accordion-button" onclick="toggleAccordion(this)">
-                Dlaczego uważam, że będę dobrym rzecznikiem
-            </button>
+            <button class="accordion-button" onclick="toggle(this)">Dlaczego uważam, że będę dobrym rzecznikiem</button>
             <div class="accordion-content">
                 Uważam, że będę dobrym rzecznikiem, ponieważ zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli. Staram się zawsze patrzeć na sytuację z różnych perspektyw i szukać sprawiedliwych rozwiązań. Potrafię słuchać innych bez oceniania i podchodzić do problemów spokojnie oraz odpowiedzialnie.
             </div>
         </div>
-
         <div class="accordion-item">
-            <button class="accordion-button" onclick="toggleAccordion(this)">
-                Jak działam w trudnych sytuacjach?
-            </button>
+            <button class="accordion-button" onclick="toggle(this)">Jak działam w trudnych sytuacjach?</button>
             <div class="accordion-content">
                 W takiej sytuacji najpierw wysłuchałabym spokojnie uczennicy poszkodowanej i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik mam obowiązek zachować bezstronność i zadbać o sprawiedliwy przebieg sprawy, dlatego muszę poznać stanowisko obu stron. Skontaktowałabym się również z drugą uczennicą, zebrała wszystkie informacje i dążyła do tego, aby decyzja była oparta na faktach.
             </div>
         </div>
     </div>
-
-    <div class="footer">
-        <p>&copy; 2026 Student Representative Portal</p>
-    </div>
-
+    <div class="footer"><p>&copy; 2026 Rzecznik Praw Ucznia</p></div>
     <script>
-        function toggleAccordion(button) {
-            const content = button.nextElementSibling;
-            const isOpen = content.classList.contains('show');
-
+        function toggle(btn) {
+            const content = btn.nextElementSibling;
             document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('show'));
-            document.querySelectorAll('.accordion-button').forEach(btn => btn.classList.remove('active'));
-
-            if (!isOpen) {
-                content.classList.add('show');
-                button.classList.add('active');
-            }
+            content.classList.add('show');
         }
     </script>
 </body>
