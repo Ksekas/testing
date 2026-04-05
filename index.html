@@ -157,5 +157,28 @@
                 Jak działam w trudnych sytuacjach?
             </button>
             <div class="accordion-content">
-                W takiej sytuacji najpierw wysłuchałabym spokojnie uczennicy poszkodowanej i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik mam obowiązek zachować bezstronność i zadbać o sprawiedliwy przebieg sprawy, dlatego muszę poznać stan*
-
+                W takiej sytuacji najpierw wysłuchałabym spokojnie uczennicy poszkodowanej i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik mam obowiązek zachować bezstronność i zadbać o sprawiedliwy przebieg sprawy, dlatego muszę poznać stanowisko obu stron. Skontaktowałabym się również z drugą uczennicą, zebrała wszystkie informacje i dążyła do tego, aby decyzja była oparta na faktach.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Student Representative Portal</p>
+    </div>
+
+    <script>
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+
+            document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('show'));
+            document.querySelectorAll('.accordion-button').forEach(btn => btn.classList.remove('active'));
+
+            if (!isOpen) {
+                content.classList.add('show');
+                button.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
