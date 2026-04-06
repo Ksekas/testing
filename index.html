@@ -1,138 +1,146 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ksenia Kasparek</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ksenia Kasparek</title>
 
-        :root {
-            --bg-1: #1f2329;
-            --bg-2: #2d333b;
-            --accent: #81c995;
-            --accent-2: #b7f0c2;
-            --text-main: #f3f6f8;
-            --text-soft: #c7cdd3;
-            --text-muted: #9ca6af;
-            --shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
-            --radius: 22px;
-        }
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(129, 201, 149, 0.14), transparent 32%),
-                linear-gradient(135deg, #1e2228 0%, #2b3138 45%, #3a4148 100%);
-            color: var(--text-main);
-            min-height: 100vh;
-        }
+:root {
+    --accent: #81c995;
+    --text-main: #f3f6f8;
+    --text-soft: #c7cdd3;
+    --bg: #1f2329;
+}
 
-        .container {
-            width: min(1100px, calc(100% - 32px));
-            margin: 0 auto;
-            padding: 32px 0 50px;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #1e2228, #3a4148);
+    color: var(--text-main);
+}
 
-        .hero {
-            border-radius: 30px;
-            padding: 70px 30px 55px;
-            text-align: center;
-            background: linear-gradient(135deg, #262b31 0%, #303740 100%);
-            box-shadow: var(--shadow);
-            margin-bottom: 42px;
-        }
+/* CONTAINER */
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px 16px 40px;
+}
 
-        .hero h1 {
-            font-size: 3.5rem;
-            color: var(--accent);
-            margin-bottom: 14px;
-        }
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 50px 20px 35px;
+    background: #262b31;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
 
-        .hero p {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--text-soft);
-            line-height: 1.8;
-        }
+.hero h1 {
+    font-size: 2.4rem;
+    color: var(--accent);
+}
 
-        .section-heading {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin: 14px 0 26px;
-        }
+.hero p {
+    margin-top: 10px;
+    color: var(--text-soft);
+    font-size: 1rem;
+}
 
-        .section-heading h2 {
-            color: var(--accent);
-        }
+/* SECTION */
+.section-heading {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
 
-        .line {
-            flex: 1;
-            height: 2px;
-            background: var(--accent);
-        }
+.section-heading h2 {
+    color: var(--accent);
+    font-size: 1.3rem;
+}
 
-        .accordion-item {
-            background: rgba(255,255,255,0.06);
-            border-radius: var(--radius);
-            margin-bottom: 20px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
+.line {
+    flex: 1;
+    height: 2px;
+    background: var(--accent);
+    margin-left: 10px;
+}
 
-        .accordion-item:hover {
-            transform: translateY(-3px);
-        }
+/* ACCORDION */
+.accordion-item {
+    background: #2d333b;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
 
-        .accordion-button {
-            width: 100%;
-            padding: 22px;
-            border: none;
-            background: transparent;
-            color: var(--text-main);
-            font-size: 1.1rem;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            cursor: pointer;
-        }
+.accordion-button {
+    width: 100%;
+    padding: 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .accordion-button:hover {
-            color: var(--accent-2);
-        }
+.accordion-button:active {
+    background: rgba(255,255,255,0.05);
+}
 
-        .icon {
-            font-size: 1.3rem;
-        }
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.4s ease;
+}
 
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: 0.4s ease;
-        }
+.accordion-content.show {
+    max-height: 1000px; /* FIX na mobile */
+}
 
-        .accordion-content.show {
-            max-height: 500px;
-        }
+.accordion-content p {
+    padding: 0 18px 18px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
 
-        .accordion-content p {
-            padding: 0 22px 22px;
-            color: var(--text-soft);
-            line-height: 1.9;
-        }
+/* FOOTER */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: var(--text-soft);
+}
 
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-muted);
-        }
-    </style>
+/* MOBILE BOOST */
+@media (max-width: 600px) {
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .accordion-button {
+        font-size: 0.95rem;
+        padding: 16px;
+    }
+
+    .accordion-content p {
+        font-size: 0.9rem;
+    }
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
@@ -147,10 +155,11 @@
         <div class="line"></div>
     </div>
 
+    <!-- 1 -->
     <div class="accordion-item">
         <button class="accordion-button" onclick="toggle(this)">
             Dlaczego chcę zostać Rzecznikiem?
-            <span class="icon">+</span>
+            <span>+</span>
         </button>
         <div class="accordion-content">
             <p>
@@ -162,39 +171,38 @@
         </div>
     </div>
 
+    <!-- 2 (UPDATED) -->
     <div class="accordion-item">
         <button class="accordion-button" onclick="toggle(this)">
             Dlaczego uważam, że będę dobrym rzecznikiem?
-            <span class="icon">+</span>
+            <span>+</span>
         </button>
         <div class="accordion-content">
             <p>
-                Rola rzecznika wymaga spokoju, obiektywizmu i odpowiedzialności.
-                W trudnych sytuacjach ważne jest dokładne zrozumienie problemu
-                oraz wysłuchanie wszystkich stron przed wyciągnięciem wniosków.
+                Zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli.
+                Potrafię budować dobre relacje zarówno z uczniami, jak i z nauczycielami.
+                Dzięki temu łatwiej jest mi zrozumieć różne perspektywy i znaleźć rozwiązania,
+                które są sprawiedliwe dla wszystkich stron.
             </p>
         </div>
     </div>
 
+    <!-- 3 -->
     <div class="accordion-item">
         <button class="accordion-button" onclick="toggle(this)">
             Jak postąpiłabym w tej sytuacji?
-            <span class="icon">+</span>
+            <span>+</span>
         </button>
         <div class="accordion-content">
             <p>
                 Jeśli poszkodowana dziewczyna „B” złapałaby mnie na korytarzu i poprosiła,
                 żebym nie broniła „A” na komisji, na początku wysłuchałabym uczennicy „B”
-                i okazała jej wsparcie, żeby czuła, że jej sytuacja jest ważna. Następnie
-                wyjaśniłabym, że jako Rzecznik muszę pozostać bezstronna, dlatego nie mogę
-                odmówić wysłuchania drugiej strony. Skontaktowałabym się też z uczennicą „A”,
-                żeby poznać jej punkt widzenia, a potem zebrałabym wszystkie informacje,
-                starając się spojrzeć na sprawę możliwie obiektywnie.
+                i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik muszę
+                pozostać bezstronna. Skontaktowałabym się też z uczennicą „A” i zebrała
+                wszystkie informacje.
                 <br><br>
-                Podczas komisji zadbałabym o to, żeby każda ze stron miała szansę się
-                wypowiedzieć i została potraktowana uczciwie. Moją rolą nie byłoby
-                opowiadanie się po którejś stronie, tylko dopilnowanie, żeby decyzja była
-                sprawiedliwa i oparta na faktach, a nie emocjach.
+                Podczas komisji zadbałabym o to, żeby każda ze stron została wysłuchana,
+                a decyzja była oparta na faktach, a nie emocjach.
             </p>
         </div>
     </div>
