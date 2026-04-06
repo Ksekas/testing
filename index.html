@@ -6,224 +6,377 @@
 <title>Ksenia Kasparek</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 :root {
-    --bg: #1e2228;
-    --card: #2b3138;
-    --accent: #9fb7a5;        /* elegancki zielony */
-    --accent-light: #c6d9cd;
-    --text: #f3f6f8;
-    --text-soft: #c7cdd3;
+    --bg-main: #1b1f26;
+    --bg-secondary: #232934;
+    --card: rgba(255, 255, 255, 0.06);
+    --card-hover: rgba(255, 255, 255, 0.09);
+    --accent: #6aaee8;
+    --accent-strong: #8ec5f3;
+    --text-main: #f3f7fb;
+    --text-soft: #c9d3de;
+    --text-muted: #96a3b3;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+    --radius: 20px;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #1e2228, #3a4148);
-    color: var(--text);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(106, 174, 232, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(142, 197, 243, 0.08), transparent 22%),
+        linear-gradient(135deg, #181c23 0%, #1f2530 45%, #28303c 100%);
+    color: var(--text-main);
+    min-height: 100vh;
 }
 
-/* CONTAINER */
 .container {
-    max-width: 700px;
-    margin: auto;
-    padding: 20px 16px 40px;
+    width: min(880px, calc(100% - 24px));
+    margin: 0 auto;
+    padding: 18px 0 34px;
 }
 
-/* HERO */
 .hero {
+    background:
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        linear-gradient(135deg, #202632 0%, #2a3240 100%);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 42px 22px 34px;
     text-align: center;
-    padding: 50px 20px 40px;
-    background: linear-gradient(135deg, #262b31, #303740);
-    border-radius: 22px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(106, 174, 232, 0.14);
+    border: 1px solid rgba(106, 174, 232, 0.22);
+    color: var(--accent-strong);
+    font-size: 0.92rem;
+    margin-bottom: 14px;
 }
 
 .hero h1 {
-    font-size: 2.4rem;
-    color: var(--accent-light);
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    color: var(--accent-strong);
+    margin-bottom: 10px;
+    line-height: 1.1;
 }
 
 .hero p {
-    margin-top: 10px;
     color: var(--text-soft);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.75;
+    font-size: 1rem;
 }
 
-/* SECTION */
 .section-heading {
-    display:flex;
-    align-items:center;
-    margin:20px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0 18px;
 }
 
 .section-heading h2 {
-    color: var(--accent-light);
-    font-size:1.2rem;
+    color: var(--accent-strong);
+    font-size: 1.25rem;
+    white-space: nowrap;
 }
 
 .line {
-    flex:1;
-    height:1px;
-    background: var(--accent);
-    margin-left:10px;
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(106, 174, 232, 0.9), transparent);
 }
 
-/* ACCORDION */
+.accordion {
+    display: grid;
+    gap: 14px;
+}
+
 .accordion-item {
     background: var(--card);
-    border-radius:16px;
-    margin-bottom:14px;
-    overflow:hidden;
-    transition: 0.3s ease;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.accordion-item:hover {
+    transform: translateY(-2px);
+    background: var(--card-hover);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2);
 }
 
 .accordion-item.active {
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    border-color: rgba(106, 174, 232, 0.28);
+    box-shadow: 0 16px 34px rgba(0,0,0,0.22);
 }
 
 .accordion-button {
-    width:100%;
-    padding:18px;
-    font-size:1rem;
-    font-weight:600;
-    border:none;
-    background:transparent;
-    color:var(--text);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    cursor:pointer;
+    width: 100%;
+    padding: 18px 18px;
+    border: none;
+    background: transparent;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.accordion-button span {
-    transition: 0.3s ease;
+.accordion-button:hover {
+    color: var(--accent-strong);
 }
 
-.accordion-item.active .accordion-button span:last-child {
+.accordion-title {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(106, 174, 232, 0.12);
+    color: var(--accent-strong);
+    font-size: 1.2rem;
+    transition: transform 0.35s ease, background 0.25s ease;
+}
+
+.accordion-item.active .icon {
     transform: rotate(45deg);
+    background: rgba(106, 174, 232, 0.18);
 }
 
-/* SMOOTH */
 .accordion-content {
-    max-height:0;
-    opacity:0;
-    overflow:hidden;
-    transition: 
-        max-height 0.45s ease,
-        opacity 0.3s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s ease;
+    background: rgba(255,255,255,0.02);
 }
 
 .accordion-content.show {
-    max-height: 600px;
-    opacity:1;
+    grid-template-rows: 1fr;
+}
+
+.accordion-content-inner {
+    overflow: hidden;
 }
 
 .accordion-content p {
     padding: 0 18px 20px;
     color: var(--text-soft);
-    line-height:1.75;
-    font-size:0.95rem;
+    line-height: 1.8;
+    font-size: 0.97rem;
     transform: translateY(10px);
-    transition: 0.35s ease;
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
 .accordion-content.show p {
     transform: translateY(0);
+    opacity: 1;
 }
 
-/* FOOTER */
 .footer {
-    text-align:center;
-    margin-top:30px;
-    color: var(--text-soft);
-    font-size:0.9rem;
+    margin-top: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 8px 0;
 }
 
-/* MOBILE */
-@media (max-width:600px) {
+@media (max-width: 700px) {
+    .container {
+        width: min(100% - 14px, 880px);
+        padding-top: 10px;
+        padding-bottom: 24px;
+    }
 
-    .hero h1 {
-        font-size: 2rem;
+    .hero {
+        border-radius: 22px;
+        padding: 32px 16px 26px;
+        margin-bottom: 20px;
+    }
+
+    .hero-badge {
+        font-size: 0.85rem;
+        padding: 7px 12px;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .section-heading {
+        margin: 8px 0 14px;
+    }
+
+    .section-heading h2 {
+        font-size: 1.1rem;
+    }
+
+    .accordion {
+        gap: 12px;
+    }
+
+    .accordion-item {
+        border-radius: 16px;
     }
 
     .accordion-button {
-        padding:16px;
-        font-size:0.95rem;
+        padding: 16px 15px;
+        font-size: 0.96rem;
+        align-items: flex-start;
+    }
+
+    .icon {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        font-size: 1.08rem;
+        margin-top: 1px;
     }
 
     .accordion-content p {
-        font-size:0.9rem;
+        padding: 0 15px 18px;
+        font-size: 0.93rem;
+        line-height: 1.72;
+    }
+
+    .footer {
+        font-size: 0.84rem;
+        margin-top: 18px;
     }
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <div class="hero">
+    <header class="hero">
+        <div class="hero-badge">Kandydatka na Rzecznika Praw Ucznia</div>
         <h1>Ksenia Kasparek</h1>
-        <p>Kandydatka na Rzecznika Praw Ucznia</p>
-    </div>
+        <p>
+            Chcę, aby każdy uczeń czuł, że w szkole ma głos, wsparcie
+            i osobę, do której naprawdę można się zwrócić.
+        </p>
+    </header>
 
-    <div class="section-heading">
-        <h2>Informacje</h2>
-        <div class="line"></div>
-    </div>
-
-    <!-- 1 -->
-    <div class="accordion-item">
-        <button class="accordion-button" onclick="toggle(this)">
-            Dlaczego chcę zostać Rzecznikiem?
-            <span>+</span>
-        </button>
-        <div class="accordion-content">
-            <p>
-                Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym,
-                aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację.
-                Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań,
-                które są sprawiedliwe dla wszystkich stron.
-            </p>
+    <section>
+        <div class="section-heading">
+            <h2>Informacje</h2>
+            <div class="line"></div>
         </div>
-    </div>
 
-    <!-- 2 -->
-    <div class="accordion-item">
-        <button class="accordion-button" onclick="toggle(this)">
-            Dlaczego uważam, że będę dobrym rzecznikiem?
-            <span>+</span>
-        </button>
-        <div class="accordion-content">
-            <p>
-                Zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli.
-                Potrafię budować dobre relacje zarówno z uczniami, jak i z nauczycielami.
-                Dzięki temu łatwiej jest mi zrozumieć różne perspektywy i znaleźć rozwiązania,
-                które są sprawiedliwe dla wszystkich stron.
-            </p>
-        </div>
-    </div>
+        <div class="accordion">
 
-    <!-- 3 -->
-    <div class="accordion-item">
-        <button class="accordion-button" onclick="toggle(this)">
-            Jak postąpiłabym w tej sytuacji?
-            <span>+</span>
-        </button>
-        <div class="accordion-content">
-            <p>
-                Jeśli poszkodowana dziewczyna „B” złapałaby mnie na korytarzu i poprosiła,
-                żebym nie broniła „A” na komisji, na początku wysłuchałabym uczennicy „B”
-                i okazała jej wsparcie. Następnie wyjaśniłabym, że jako Rzecznik muszę
-                pozostać bezstronna. Skontaktowałabym się też z uczennicą „A” i zebrała
-                wszystkie informacje.
-                <br><br>
-                Podczas komisji zadbałabym o to, żeby każda ze stron została wysłuchana,
-                a decyzja była oparta na faktach, a nie emocjach.
-            </p>
+            <!-- O MNIE -->
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggle(this)">
+                    <span class="accordion-title">O mnie</span>
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <p>
+                            Tutaj możesz dodać informacje o sobie, np. kilka zdań o tym,
+                            kim jesteś, czym się interesujesz, jakie masz doświadczenie
+                            w działaniach szkolnych, co jest dla Ciebie ważne i dlaczego
+                            zdecydowałaś się kandydować.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1 -->
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggle(this)">
+                    <span class="accordion-title">Dlaczego chcę zostać Rzecznikiem?</span>
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <p>
+                            Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym,
+                            aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację.
+                            Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań,
+                            które są sprawiedliwe dla wszystkich stron.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggle(this)">
+                    <span class="accordion-title">Dlaczego uważam, że będę dobrym rzecznikiem?</span>
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <p>
+                            Zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli.
+                            Potrafię budować dobre relacje zarówno z uczniami, jak i z nauczycielami.
+                            Dzięki temu łatwiej jest mi zrozumieć różne perspektywy i znaleźć rozwiązania,
+                            które są sprawiedliwe dla wszystkich stron.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggle(this)">
+                    <span class="accordion-title">Jak postąpiłabym w tej sytuacji?</span>
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <p>
+                            Jeśli poszkodowana dziewczyna „B” złapałaby mnie na korytarzu i poprosiła,
+                            żebym nie broniła „A” na komisji, na początku wysłuchałabym uczennicy „B”
+                            i okazała jej wsparcie, żeby czuła, że jej sytuacja jest ważna. Następnie
+                            wyjaśniłabym, że jako Rzecznik muszę pozostać bezstronna, dlatego nie mogę
+                            odmówić wysłuchania drugiej strony. Skontaktowałabym się też z uczennicą „A”,
+                            żeby poznać jej punkt widzenia, a potem zebrałabym wszystkie informacje,
+                            starając się spojrzeć na sprawę możliwie obiektywnie.
+                            <br><br>
+                            Podczas komisji zadbałabym o to, żeby każda ze stron miała szansę się
+                            wypowiedzieć i została potraktowana uczciwie. Moją rolą nie byłoby
+                            opowiadanie się po którejś stronie, tylko dopilnowanie, żeby decyzja była
+                            sprawiedliwa i oparta na faktach, a nie emocjach.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </section>
 
     <div class="footer">
         Ksenia Kasparek • Rzecznik Praw Ucznia
@@ -232,15 +385,20 @@ body {
 </div>
 
 <script>
-function toggle(btn) {
-    const item = btn.parentElement;
-    const content = btn.nextElementSibling;
-    const open = content.classList.contains("show");
+function toggle(button) {
+    const item = button.parentElement;
+    const content = button.nextElementSibling;
+    const isOpen = content.classList.contains("show");
 
-    document.querySelectorAll(".accordion-content").forEach(c => c.classList.remove("show"));
-    document.querySelectorAll(".accordion-item").forEach(i => i.classList.remove("active"));
+    document.querySelectorAll(".accordion-content").forEach(el => {
+        el.classList.remove("show");
+    });
 
-    if (!open) {
+    document.querySelectorAll(".accordion-item").forEach(el => {
+        el.classList.remove("active");
+    });
+
+    if (!isOpen) {
         content.classList.add("show");
         item.classList.add("active");
     }
