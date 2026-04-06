@@ -17,6 +17,7 @@
   --accent:#f0b3ff;
 }
 
+/* ANIMOWANE TŁO */
 body {
   font-family:"Segoe UI",sans-serif;
   min-height:100vh;
@@ -33,6 +34,7 @@ body {
   100%{background-position:0% 50%;}
 }
 
+/* GLOW */
 .bg-glow {
   position:fixed;
   inset:0;
@@ -45,6 +47,7 @@ body {
   filter:blur(70px);
 }
 
+/* LAYOUT */
 .container {
   position:relative;
   z-index:1;
@@ -53,6 +56,7 @@ body {
   padding:16px 0 30px;
 }
 
+/* HERO */
 .hero {
   text-align:center;
   padding:38px 18px 30px;
@@ -75,6 +79,7 @@ body {
   color:var(--text-soft);
 }
 
+/* SECTION */
 .section-heading {
   display:flex;
   align-items:center;
@@ -84,7 +89,7 @@ body {
 
 .section-heading h2 {
   color:var(--accent);
-  font-size:1.15rem;
+  font-size:1.2rem;
 }
 
 .line {
@@ -93,6 +98,7 @@ body {
   background:linear-gradient(to right,var(--accent),transparent);
 }
 
+/* ACCORDION */
 .accordion-item {
   border-radius:18px;
   overflow:hidden;
@@ -101,16 +107,35 @@ body {
   margin-bottom:12px;
 }
 
+/* 🔥 NOWE LEPSZE HEADLINES */
 .accordion-button {
   width:100%;
   border:none;
   background:transparent;
   color:var(--text-main);
-  padding:18px 16px;
-  font-weight:700;
+
+  padding:20px 18px;
+  font-weight:800;
+  font-size:1.15rem;
+
+  letter-spacing:0.3px;
+  line-height:1.3;
+
   display:flex;
   justify-content:space-between;
+  align-items:center;
+
   cursor:pointer;
+  transition:0.25s ease;
+}
+
+.accordion-button:hover {
+  color:#ffd6ff;
+  transform:translateX(2px);
+}
+
+.accordion-item.active .accordion-button {
+  color:#ffd6ff;
 }
 
 .icon {
@@ -121,6 +146,7 @@ body {
   transform:rotate(45deg);
 }
 
+/* CONTENT */
 .accordion-content {
   max-height:0;
   overflow:hidden;
@@ -129,20 +155,29 @@ body {
 }
 
 .accordion-content.show {
-  max-height:600px;
+  max-height:700px;
   opacity:1;
 }
 
 .accordion-content p {
-  padding:0 16px 18px;
+  padding:0 18px 18px;
   color:var(--text-soft);
   line-height:1.7;
 }
 
+/* FOOTER */
 .footer {
   text-align:center;
   margin-top:20px;
   color:var(--text-muted);
+}
+
+/* MOBILE */
+@media (max-width:640px) {
+  .accordion-button {
+    font-size:1.05rem;
+    padding:18px 16px;
+  }
 }
 </style>
 </head>
@@ -168,7 +203,13 @@ body {
 O mnie <span class="icon">+</span>
 </button>
 <div class="accordion-content">
-<p>Tu możesz dodać informacje o sobie.</p>
+<p>
+Jestem osobą, która stara się podchodzić do różnych sytuacji spokojnie i z otwartą głową. Ważne jest dla mnie, żeby najpierw wysłuchać drugiej osoby i zrozumieć jej punkt widzenia, zanim wyciągnę wnioski.<br><br>
+
+Na co dzień mam dobre relacje zarówno z uczniami, jak i z nauczycielami, co pozwala mi patrzeć na różne sprawy z kilku perspektyw. Dzięki temu łatwiej jest mi znaleźć rozwiązania, które są sprawiedliwe i uwzględniają interesy obu stron.<br><br>
+
+Zależy mi na tym, żeby każdy uczeń czuł, że ma w szkole wsparcie i że jego głos się liczy – nawet jeśli nie zawsze ma odwagę, żeby sam się odezwać. Chciałabym być osobą, do której można przyjść i zostać potraktowanym poważnie.
+</p>
 </div>
 </div>
 
@@ -179,8 +220,7 @@ Dlaczego chcę zostać Rzecznikiem? <span class="icon">+</span>
 </button>
 <div class="accordion-content">
 <p>
-Chcę zostać Rzecznikiem, ponieważ zależy mi na tym,
-aby uczniowie mieli realne wsparcie.
+Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym, aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację. Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań, które są sprawiedliwe dla wszystkich stron.
 </p>
 </div>
 </div>
@@ -188,13 +228,11 @@ aby uczniowie mieli realne wsparcie.
 <!-- 2 -->
 <div class="accordion-item">
 <button class="accordion-button" onclick="toggleAccordion(this)">
-Dlaczego będę dobrym rzecznikiem? <span class="icon">+</span>
+Dlaczego uważam, że będę dobrym rzecznikiem? <span class="icon">+</span>
 </button>
 <div class="accordion-content">
 <p>
-Zależy mi na rzeczywistej pomocy, a nie tylko formalnej roli.
-Potrafię budować relacje z uczniami i nauczycielami,
-co pozwala znaleźć sprawiedliwe rozwiązania.
+Zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli. Potrafię budować dobre relacje zarówno z uczniami, jak i z nauczycielami. Dzięki temu łatwiej jest mi zrozumieć różne perspektywy i znaleźć rozwiązania, które są sprawiedliwe dla wszystkich stron.
 </p>
 </div>
 </div>
@@ -206,13 +244,13 @@ Jak postąpiłabym w tej sytuacji? <span class="icon">+</span>
 </button>
 <div class="accordion-content">
 <p>
-Najpierw wysłuchałabym uczennicy „B” i okazała wsparcie,
-a następnie zebrałabym informacje od obu stron.
+Najpierw wysłuchałabym uczennicy „B” i okazała wsparcie. Następnie zachowałabym bezstronność i zebrała informacje od obu stron.<br><br>
+Podczas komisji zadbałabym o sprawiedliwą decyzję opartą na faktach.
 </p>
 </div>
 </div>
 
-<!-- 🔥 NOWA SEKCJA -->
+<!-- 4 -->
 <div class="accordion-item">
 <button class="accordion-button" onclick="toggleAccordion(this)">
 Co chcę zmienić <span class="icon">+</span>
