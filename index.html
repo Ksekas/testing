@@ -1,369 +1,254 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ksenia Kasparek</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ksenia Kasparek</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    :root {
-      --text-main: #f7f4ff;
-      --text-soft: #e4daf5;
-      --text-muted: #c8bddc;
-      --glass: rgba(255, 255, 255, 0.08);
-      --glass-strong: rgba(255, 255, 255, 0.12);
-      --border: rgba(255, 255, 255, 0.14);
-      --accent: #f0b3ff;
-      --accent-2: #d6b7ff;
-    }
+:root {
+  --text-main:#f7f4ff;
+  --text-soft:#e4daf5;
+  --text-muted:#c8bddc;
+  --glass:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.14);
+  --accent:#f0b3ff;
+}
 
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      color: var(--text-main);
-      overflow-x: hidden;
-      background: linear-gradient(270deg, #170d22, #2b1636, #4a1850, #2a183f, #170d22);
-      background-size: 400% 400%;
-      animation: gradientMove 14s ease infinite;
-    }
+body {
+  font-family:"Segoe UI",sans-serif;
+  min-height:100vh;
+  color:var(--text-main);
+  overflow-x:hidden;
+  background:linear-gradient(270deg,#170d22,#2b1636,#4a1850,#2a183f,#170d22);
+  background-size:400% 400%;
+  animation:gradientMove 14s ease infinite;
+}
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+@keyframes gradientMove {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 
-    .bg-glow {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 90, 190, 0.22), transparent 32%),
-        radial-gradient(circle at 80% 20%, rgba(170, 90, 255, 0.22), transparent 30%),
-        radial-gradient(circle at 50% 80%, rgba(120, 60, 255, 0.16), transparent 34%);
-      filter: blur(70px);
-    }
+.bg-glow {
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,90,190,0.22), transparent 32%),
+    radial-gradient(circle at 80% 20%, rgba(170,90,255,0.22), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(120,60,255,0.16), transparent 34%);
+  filter:blur(70px);
+}
 
-    .container {
-      position: relative;
-      z-index: 1;
-      width: min(860px, calc(100% - 20px));
-      margin: 0 auto;
-      padding: 16px 0 30px;
-    }
+.container {
+  position:relative;
+  z-index:1;
+  width:min(860px,calc(100% - 20px));
+  margin:0 auto;
+  padding:16px 0 30px;
+}
 
-    .hero {
-      text-align: center;
-      padding: 38px 18px 30px;
-      margin-bottom: 24px;
-      border-radius: 24px;
-      background: var(--glass);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
-    }
+.hero {
+  text-align:center;
+  padding:38px 18px 30px;
+  margin-bottom:24px;
+  border-radius:24px;
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+}
 
-    .badge {
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--text-soft);
-      font-size: 0.9rem;
-    }
+.hero h1 {
+  font-size:clamp(2.2rem,6vw,3.7rem);
+  background:linear-gradient(90deg,#ffb7ef,#d7b8ff,#f5c2ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-    .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 3.7rem);
-      line-height: 1.05;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #ffb7ef, #d7b8ff, #f5c2ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+.hero p {
+  margin-top:10px;
+  color:var(--text-soft);
+}
 
-    .hero p {
-      max-width: 620px;
-      margin: 0 auto;
-      color: var(--text-soft);
-      line-height: 1.7;
-      font-size: 1rem;
-    }
+.section-heading {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:10px 0 16px;
+}
 
-    .section-heading {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 10px 0 16px;
-      padding: 0 4px;
-    }
+.section-heading h2 {
+  color:var(--accent);
+  font-size:1.15rem;
+}
 
-    .section-heading h2 {
-      color: var(--accent);
-      font-size: 1.15rem;
-      white-space: nowrap;
-    }
+.line {
+  flex:1;
+  height:1px;
+  background:linear-gradient(to right,var(--accent),transparent);
+}
 
-    .line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, rgba(240, 179, 255, 0.9), transparent);
-    }
+.accordion-item {
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--glass);
+  border:1px solid var(--border);
+  margin-bottom:12px;
+}
 
-    .accordion {
-      display: grid;
-      gap: 12px;
-    }
+.accordion-button {
+  width:100%;
+  border:none;
+  background:transparent;
+  color:var(--text-main);
+  padding:18px 16px;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+}
 
-    .accordion-item {
-      border-radius: 18px;
-      overflow: hidden;
-      background: var(--glass);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
+.icon {
+  transition:0.3s;
+}
 
-    .accordion-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
+.accordion-item.active .icon {
+  transform:rotate(45deg);
+}
 
-    .accordion-item.active {
-      border-color: rgba(240, 179, 255, 0.28);
-    }
+.accordion-content {
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:0.4s ease;
+}
 
-    .accordion-button {
-      width: 100%;
-      border: none;
-      background: transparent;
-      color: var(--text-main);
-      padding: 18px 16px;
-      font-size: 1rem;
-      font-weight: 700;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      -webkit-tap-highlight-color: transparent;
-    }
+.accordion-content.show {
+  max-height:600px;
+  opacity:1;
+}
 
-    .accordion-title {
-      flex: 1;
-      line-height: 1.4;
-    }
+.accordion-content p {
+  padding:0 16px 18px;
+  color:var(--text-soft);
+  line-height:1.7;
+}
 
-    .icon {
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      font-size: 1.15rem;
-      color: var(--accent);
-      background: rgba(255, 255, 255, 0.08);
-      transition: transform 0.35s ease, background 0.35s ease;
-    }
-
-    .accordion-item.active .icon {
-      transform: rotate(45deg);
-      background: rgba(255, 255, 255, 0.14);
-    }
-
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.45s ease, opacity 0.3s ease;
-    }
-
-    .accordion-content.show {
-      max-height: 500px;
-      opacity: 1;
-    }
-
-    .accordion-content p {
-      padding: 0 16px 18px;
-      color: var(--text-soft);
-      line-height: 1.75;
-      font-size: 0.96rem;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 20px;
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      padding-bottom: 6px;
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        width: min(100% - 12px, 860px);
-        padding-top: 10px;
-        padding-bottom: 20px;
-      }
-
-      .hero {
-        padding: 30px 14px 24px;
-        border-radius: 20px;
-        margin-bottom: 18px;
-      }
-
-      .badge {
-        font-size: 0.82rem;
-        padding: 7px 12px;
-      }
-
-      .hero p {
-        font-size: 0.93rem;
-      }
-
-      .section-heading h2 {
-        font-size: 1.02rem;
-      }
-
-      .accordion-button {
-        padding: 15px 14px;
-        font-size: 0.95rem;
-        align-items: flex-start;
-      }
-
-      .accordion-content p {
-        padding: 0 14px 16px;
-        font-size: 0.92rem;
-      }
-    }
-  </style>
+.footer {
+  text-align:center;
+  margin-top:20px;
+  color:var(--text-muted);
+}
+</style>
 </head>
+
 <body>
-  <div class="bg-glow"></div>
+<div class="bg-glow"></div>
 
-  <main class="container">
-    <header class="hero">
-      <div class="badge">Kandydatka na Rzecznika Praw Ucznia</div>
-      <h1>Ksenia Kasparek</h1>
-      <p>
-        Chcę, aby każdy uczeń czuł, że w szkole ma głos, wsparcie
-        i osobę, do której naprawdę można się zwrócić.
-      </p>
-    </header>
+<div class="container">
 
-    <section>
-      <div class="section-heading">
-        <h2>Informacje</h2>
-        <div class="line"></div>
-      </div>
+<div class="hero">
+  <h1>Ksenia Kasparek</h1>
+  <p>Kandydatka na Rzecznika Praw Ucznia</p>
+</div>
 
-      <div class="accordion">
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleAccordion(this)">
-            <span class="accordion-title">O mnie</span>
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-content">
-            <p>
-              Tutaj możesz później dodać informacje o sobie, swoim doświadczeniu,
-              zainteresowaniach i tym, dlaczego zdecydowałaś się kandydować.
-            </p>
-          </div>
-        </div>
+<div class="section-heading">
+  <h2>Informacje</h2>
+  <div class="line"></div>
+</div>
 
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleAccordion(this)">
-            <span class="accordion-title">Dlaczego chcę zostać Rzecznikiem?</span>
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-content">
-            <p>
-              Chcę zostać Rzecznikiem Praw Ucznia, ponieważ zależy mi na tym,
-              aby uczniowie mieli realne wsparcie, a nie tylko formalną reprezentację.
-              Staram się patrzeć na sytuacje z różnych perspektyw i szukać rozwiązań,
-              które są sprawiedliwe dla wszystkich stron.
-            </p>
-          </div>
-        </div>
+<!-- O MNIE -->
+<div class="accordion-item">
+<button class="accordion-button" onclick="toggleAccordion(this)">
+O mnie <span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>Tu możesz dodać informacje o sobie.</p>
+</div>
+</div>
 
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleAccordion(this)">
-            <span class="accordion-title">Dlaczego uważam, że będę dobrym rzecznikiem?</span>
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-content">
-            <p>
-              Zależy mi na rzeczywistej pomocy, a nie tylko na pełnieniu formalnej roli.
-              Potrafię budować dobre relacje zarówno z uczniami, jak i z nauczycielami.
-              Dzięki temu łatwiej jest mi zrozumieć różne perspektywy i znaleźć rozwiązania,
-              które są sprawiedliwe dla wszystkich stron.
-            </p>
-          </div>
-        </div>
+<!-- 1 -->
+<div class="accordion-item">
+<button class="accordion-button" onclick="toggleAccordion(this)">
+Dlaczego chcę zostać Rzecznikiem? <span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>
+Chcę zostać Rzecznikiem, ponieważ zależy mi na tym,
+aby uczniowie mieli realne wsparcie.
+</p>
+</div>
+</div>
 
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleAccordion(this)">
-            <span class="accordion-title">Jak postąpiłabym w tej sytuacji?</span>
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-content">
-            <p>
-              Jeśli poszkodowana dziewczyna „B” złapałaby mnie na korytarzu i poprosiła,
-              żebym nie broniła „A” na komisji, na początku wysłuchałabym uczennicy „B”
-              i okazała jej wsparcie, żeby czuła, że jej sytuacja jest ważna. Następnie
-              wyjaśniłabym, że jako Rzecznik muszę pozostać bezstronna, dlatego nie mogę
-              odmówić wysłuchania drugiej strony. Skontaktowałabym się też z uczennicą „A”,
-              żeby poznać jej punkt widzenia, a potem zebrałabym wszystkie informacje,
-              starając się spojrzeć na sprawę możliwie obiektywnie.
-              <br><br>
-              Podczas komisji zadbałabym o to, żeby każda ze stron miała szansę się
-              wypowiedzieć i została potraktowana uczciwie. Moją rolą nie byłoby
-              opowiadanie się po którejś stronie, tylko dopilnowanie, żeby decyzja była
-              sprawiedliwa i oparta na faktach, a nie emocjach.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- 2 -->
+<div class="accordion-item">
+<button class="accordion-button" onclick="toggleAccordion(this)">
+Dlaczego będę dobrym rzecznikiem? <span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>
+Zależy mi na rzeczywistej pomocy, a nie tylko formalnej roli.
+Potrafię budować relacje z uczniami i nauczycielami,
+co pozwala znaleźć sprawiedliwe rozwiązania.
+</p>
+</div>
+</div>
 
-    <footer class="footer">
-      Ksenia Kasparek • Rzecznik Praw Ucznia
-    </footer>
-  </main>
+<!-- 3 -->
+<div class="accordion-item">
+<button class="accordion-button" onclick="toggleAccordion(this)">
+Jak postąpiłabym w tej sytuacji? <span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>
+Najpierw wysłuchałabym uczennicy „B” i okazała wsparcie,
+a następnie zebrałabym informacje od obu stron.
+</p>
+</div>
+</div>
 
-  <script>
-    function toggleAccordion(button) {
-      const item = button.parentElement;
-      const content = button.nextElementSibling;
-      const isOpen = content.classList.contains("show");
+<!-- 🔥 NOWA SEKCJA -->
+<div class="accordion-item">
+<button class="accordion-button" onclick="toggleAccordion(this)">
+Co chcę zmienić <span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>
+Chciałabym wprowadzić bardziej realny kontakt uczniów z rzecznikiem.<br><br>
 
-      document.querySelectorAll(".accordion-item").forEach(el => {
-        el.classList.remove("active");
-      });
+Zależy mi też na tym, żeby uczniowie lepiej rozumieli swoje prawa i wiedzieli, gdzie mogą szukać pomocy w trudnych sytuacjach.<br><br>
 
-      document.querySelectorAll(".accordion-content").forEach(el => {
-        el.classList.remove("show");
-      });
+Chciałabym, żeby rola rzecznika była widoczna i rzeczywiście pomocna.
+</p>
+</div>
+</div>
 
-      if (!isOpen) {
-        item.classList.add("active");
-        content.classList.add("show");
-      }
-    }
-  </script>
+<div class="footer">
+Ksenia Kasparek • Rzecznik Praw Ucznia
+</div>
+
+</div>
+
+<script>
+function toggleAccordion(button){
+  const item = button.parentElement;
+  const content = button.nextElementSibling;
+  const isOpen = content.classList.contains("show");
+
+  document.querySelectorAll(".accordion-item").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".accordion-content").forEach(el => el.classList.remove("show"));
+
+  if(!isOpen){
+    item.classList.add("active");
+    content.classList.add("show");
+  }
+}
+</script>
+
 </body>
 </html>
